@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Skills | Student SkillSwap - BIST Bhopal</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+
+  <div id="navbar-placeholder"></div>
+
+  <main class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h2 class="fw-bold mb-1">⚡ Manage Your Skills</h2>
+        <p class="text-muted small mb-0">List what you can teach to fellow BISTians, and what you want to learn from them.</p>
+      </div>
+      <a href="search.html" class="btn btn-outline-primary btn-sm">
+        🔍 Explore Others' Skills
+      </a>
+    </div>
+
+    <div class="row g-4">
+      
+      <!-- Left: Add New Skill Form Card -->
+      <div class="col-lg-4 col-md-5">
+        <div class="card p-4 border-0 shadow-sm sticky-top" style="top: 80px;">
+          <h5 class="fw-bold mb-3">➕ Add a New Skill</h5>
+
+          <form id="add-skill-form">
+            <!-- Skill Name -->
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Skill / Subject Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="skillName" placeholder="e.g. Python, Figma, React, DSA" required>
+            </div>
+
+            <!-- Skill Type (Teach or Learn) -->
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Skill Direction <span class="text-danger">*</span></label>
+              <select class="form-select" name="skillType" required>
+                <option value="teach" selected>🎓 I Can Teach This Skill</option>
+                <option value="learn">📖 I Want to Learn This Skill</option>
+              </select>
+            </div>
+
+            <!-- Skill Level -->
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Proficiency / Target Level <span class="text-danger">*</span></label>
+              <select class="form-select" name="skillLevel" required>
+                <option value="Beginner">Beginner (Foundations & Syntax)</option>
+                <option value="Intermediate" selected>Intermediate (Projects & Practical)</option>
+                <option value="Advanced">Advanced (Deep Concepts & Optimization)</option>
+              </select>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Short Description / Topics</label>
+              <textarea class="form-control" name="description" rows="3" placeholder="e.g. Can teach Python loops, OOP, Pandas, and simple automation scripts..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 fw-semibold">
+              Add Skill to Profile
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Right: Skills Lists (Teach & Learn) -->
+      <div class="col-lg-8 col-md-7">
+        
+        <!-- Teach Skills Section -->
+        <div class="mb-4">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <h4 class="fw-bold mb-0 text-primary">🎓 Skills I Can Teach</h4>
+            <span class="badge bg-primary-subtle text-primary">Provider</span>
+          </div>
+          <p class="text-muted small">These skills appear in search results when other students look for mentors.</p>
+          <div id="teach-skills-list">
+            <div class="text-center py-4">
+              <div class="spinner-border text-primary spinner-border-sm"></div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Learn Skills Section -->
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <h4 class="fw-bold mb-0 text-warning-emphasis">📖 Skills I Want to Learn</h4>
+            <span class="badge bg-warning-subtle text-warning-emphasis">Seeker</span>
+          </div>
+          <p class="text-muted small">Skills you want help with. Mentors can find and offer to guide you.</p>
+          <div id="learn-skills-list">
+            <div class="text-center py-4">
+              <div class="spinner-border text-primary spinner-border-sm"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Edit Skill Modal -->
+  <div class="modal fade" id="editSkillModal" tabindex="-1" aria-labelledby="editSkillModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="editSkillModalLabel">Edit Skill Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="edit-skill-form">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Skill Name</label>
+              <input type="text" class="form-control" name="editSkillName" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Direction</label>
+              <select class="form-select" name="editSkillType" required>
+                <option value="teach">🎓 Can Teach</option>
+                <option value="learn">📖 Want to Learn</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Level</label>
+              <select class="form-select" name="editSkillLevel" required>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Description</label>
+              <textarea class="form-control" name="editDescription" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/skills.js"></script>
+</body>
+</html>

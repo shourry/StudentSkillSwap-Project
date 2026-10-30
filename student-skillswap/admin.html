@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Student SkillSwap - BIST Bhopal</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+
+  <div id="navbar-placeholder"></div>
+
+  <main class="container py-4">
+    
+    <!-- Title & Admin Badge -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <div class="d-flex align-items-center gap-2">
+          <h2 class="fw-bold mb-0">🛡️ Campus Admin Dashboard</h2>
+          <span class="badge bg-danger">Faculty / Admin Cell</span>
+        </div>
+        <p class="text-muted small mb-0">Manage registered BIST students, monitor active skill sessions, and resolve reported content.</p>
+      </div>
+      <div>
+        <button class="btn btn-outline-danger btn-sm" onclick="DB.resetDemoData()">
+          ↺ Reset All Demo Data
+        </button>
+      </div>
+    </div>
+
+    <!-- Admin Metric Cards -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3">
+        <div class="card card-stat p-3 h-100">
+          <div class="small text-muted fw-semibold">TOTAL REGISTERED STUDENTS</div>
+          <div class="fs-2 fw-bold text-primary mt-1" id="stat-total-students">0</div>
+          <div class="small text-muted">Across 6 Departments</div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="card card-stat teal p-3 h-100">
+          <div class="small text-muted fw-semibold">ACTIVE SCHEDULED SESSIONS</div>
+          <div class="fs-2 fw-bold text-teal mt-1" id="stat-active-sessions" style="color: var(--bist-teal);">0</div>
+          <div class="small text-muted">Upcoming on campus / online</div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="card card-stat p-3 h-100" style="border-left-color: #10b981;">
+          <div class="small text-muted fw-semibold">COMPLETED EXCHANGES</div>
+          <div class="fs-2 fw-bold text-success mt-1" id="stat-completed-sessions">0</div>
+          <div class="small text-muted">Successful sessions</div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="card card-stat gold p-3 h-100">
+          <div class="small text-muted fw-semibold">TOTAL LISTED SKILLS</div>
+          <div class="fs-2 fw-bold text-warning mt-1" id="stat-total-skills">0</div>
+          <div class="small text-muted">Teach & Learn categories</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      
+      <!-- Left Column: User Management Table (8 cols) -->
+      <div class="col-lg-8">
+        <div class="card p-4 border-0 shadow-sm mb-4">
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
+            <h5 class="fw-bold mb-0">👥 Registered BIST Students</h5>
+            
+            <div class="d-flex gap-2">
+              <input type="text" class="form-control form-control-sm" id="user-search-input" placeholder="Search name or enrollment...">
+              <select class="form-select form-select-sm" id="user-dept-filter" style="width: 140px;">
+                <option value="">All Depts</option>
+                <option value="CSE">CSE</option>
+                <option value="IT">IT</option>
+                <option value="ECE">ECE</option>
+                <option value="EE">EE</option>
+                <option value="ME">ME</option>
+                <option value="Civil">Civil</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light small">
+                <tr>
+                  <th>Student</th>
+                  <th>Email</th>
+                  <th>Enrollment</th>
+                  <th>Dept</th>
+                  <th>Rating</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-users-tbody" class="small">
+                <tr><td colspan="6" class="text-center py-4">Loading students...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Popular Skills & Content Moderation (4 cols) -->
+      <div class="col-lg-4">
+        
+        <!-- Popular Skills Analytics -->
+        <div class="card p-3 border-0 shadow-sm mb-4">
+          <h6 class="fw-bold mb-3">🔥 Popular Skills on Campus</h6>
+          <div id="popular-skills-container"></div>
+        </div>
+
+        <!-- Moderation & Reported Content -->
+        <div class="card p-3 border-0 shadow-sm">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="fw-bold mb-0">⚠️ Moderation & Reports</h6>
+            <span class="badge bg-danger-subtle text-danger">Safety</span>
+          </div>
+          <div id="admin-reports-container"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
